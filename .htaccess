@@ -1,0 +1,8 @@
+RewriteEngine On
+
+# Jika pengguna mencoba mengakses halaman utama, arahkan mereka ke halaman registrasi
+RewriteRule ^$ /Hot_Wheels/register.php [L]
+
+# Izinkan akses ke file dan direktori tertentu
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d

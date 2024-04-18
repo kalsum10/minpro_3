@@ -45,39 +45,69 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 }
+
+// Proses logout jika tombol logout ditekan
+if (isset($_POST['logout'])) {
+    // Hapus semua session
+    session_unset();
+    session_destroy();
+
+    // Redirect ke halaman beranda setelah logout
+    header("Location: index.php");
+    exit;
+}
+
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>Admin</title>
-        <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-        <!-- Font Awesome icons (free version)-->
-        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-        <!-- Google fonts-->
-        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
-        <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="css/styles.css" rel="stylesheet" />
-    </head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
+    <link rel="stylesheet" href="style.css"> <!-- Sesuaikan dengan path dan nama file CSS Anda -->
+</head>
+<body>
+    <header>
+        <h1>Admin Area</h1>
+        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+            <button type="submit" name="logout">Logout</button> <!-- Tambahkan tombol logout -->
+        </form>
+    </header>
+    <!-- Tambahkan seluruh konten admin di sini -->
+
+    <!-- Optional: Tambahkan pesan sukses atau gagal di sini -->
+
+    <footer>
+        <p>&copy; <?php echo date("Y"); ?> Hot Wheels Store</p>
+    </footer>
+</body>
+</html>
+
 <body>
     <style>
-        /* Styles untuk tampilan halaman admin */
-body {
+      /* Styles untuk tampilan halaman admin */
+      body {
     font-family: 'Roboto Slab', serif;
+    background-image: url("bg 1.jpg"); /* Ganti 'path_ke_gambar_background.jpg' dengan URL atau path gambar latar belakang yang Anda inginkan */
+    background-size: cover; /* Menyesuaikan ukuran gambar agar mencakup seluruh latar belakang */
+    background-repeat: no-repeat; /* Mencegah gambar latar belakang diulang */
+    background-attachment: fixed; /* Membuat gambar latar belakang tetap saat menggulir */
 }
 
 .container {
     margin-top: 50px;
+    background-color: rgba(255, 255, 255, 0.9); /* Tambahkan warna latar belakang kontainer dengan kejelasan 90% */
+    padding: 20px; /* Tambahkan padding untuk kontainer */
+    border-radius: 10px; /* Membuat sudut border kontainer melengkung */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Memberikan efek bayangan pada kontainer */
 }
+
+/* Seluruh CSS lainnya tetap seperti sebelumnya */
 
 h2 {
     font-family: 'Montserrat', sans-serif;
+    margin-bottom: 30px; /* Beri jarak antara judul dan form */
 }
 
 .form-group {
@@ -86,7 +116,7 @@ h2 {
 
 input[type="text"],
 input[type="file"] {
-    width: 100%;
+    width: calc(100% - 22px); /* Sesuaikan lebar input dengan margin */
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -127,6 +157,38 @@ button[type="submit"]:focus {
     border-color: #f5c6cb;
     color: #721c24;
 }
+
+/* Grid untuk menampilkan foto-foto */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -15px; /* Mengatasi margin kanan yang dihasilkan oleh Bootstrap */
+    margin-left: -15px; /* Mengatasi margin kiri yang dihasilkan oleh Bootstrap */
+}
+
+.col-lg-4 {
+    flex: 0 0 calc(33.333333% - 30px); /* Mengatur lebar kolom agar tiga bersejajar dengan jarak */
+    max-width: calc(33.333333% - 30px); /* Mengatur lebar maksimum agar tidak melebihi 33.33% */
+    margin: 15px; /* Beri jarak antar kolom */
+}
+
+/* Style untuk caption di bawah foto */
+.portfolio-caption {
+    text-align: center;
+}
+
+.portfolio-caption-heading {
+    font-size: 18px;
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+.portfolio-caption-subheading {
+    font-size: 16px;
+    color: #6c757d;
+    margin-bottom: 15px;
+}
+
     </style>
 
     <h2>Tambah Produk</h2>
@@ -221,5 +283,3 @@ button[type="submit"]:focus {
         </div>
     </div>
 </section>
-</body>
-</html>
